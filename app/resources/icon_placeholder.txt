@@ -1,3 +1,0 @@
-Please replace this file with a proper icon.ico file.
-You can use any .ico file and name it "icon.ico" in this same directory.
-Free icon converters are available online if you only have PNG/JPG images.

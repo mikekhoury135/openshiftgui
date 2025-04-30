@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenShift GUI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Basic styling for now -->
+    <style>
+        body { font-family: sans-serif; margin: 20px; background-color: #f4f4f4; }
+        .container { background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h1, h2 { color: #333; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input[type="text"], input[type="password"], select {
+            width: calc(100% - 22px); padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px;
+        }
+        button {
+            background-color: #007bff; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;
+        }
+        button:hover { background-color: #0056b3; }
+        #status, #namespaces, #pods { margin-top: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #e9ecef; }
+        .error { color: red; font-weight: bold; }
+        .success { color: green; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>OpenShift GUI (Web)</h1>
+        <div id="status">Checking server status...</div>
+
+        <hr>
+
+        <h2>Settings</h2>
+        <div id="settings">
+            <label for="oc_path">Path to oc.exe:</label>
+            <input type="text" id="oc_path" name="oc_path" placeholder="e.g., C:\path\to\oc.exe">
+            <button id="save-oc-path-button">Save Path</button>
+            <div id="oc-path-status"></div>
+        </div>
+
+        <hr>
+
+        <h2>Cluster Connection</h2>
+        <div id="login-form">
+            <label for="server_url">Server URL:</label>
+            <input type="text" id="server_url" name="server_url" placeholder="https://api.your-cluster.com:6443">
+
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username">
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password">
+
+            <button id="login-button">Login</button>
+            <div id="login-status"></div>
+        </div>
+
+        <hr>
+
+        <h2>Namespaces</h2>
+        <div id="namespaces">
+            <label for="namespace-select">Select Namespace:</label>
+            <select id="namespace-select">
+                <option value="">-- Select --</option>
+            </select>
+            <div id="namespace-status"></div>
+        </div>
+
+        <hr>
+
+        <h2>Pods</h2>
+        <div id="pods">
+            <div id="pod-status">Select a namespace to view pods.</div>
+            <table id="pod-table" style="display: none;">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Status</th>
+                        <th>Restarts</th>
+                        <th>Age</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Pod rows will be inserted here -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- TODO: Add sections for settings (oc path), pod details, logs -->
+
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
